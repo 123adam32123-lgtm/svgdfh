@@ -1,0 +1,21 @@
+ name: Build unsigned IPA
+
+  on:
+    workflow_dispatch:
+
+  permissions:
+    contents: read
+
+  jobs:
+    build:
+      runs-on: macos-latest
+      steps:
+        - name: Check out project
+          uses: actions/checkout@v4
+
+        - name: Build for iPhone without code signing
+          run: |
+            xcodebuild \
+              -project StudyLens.xcodeproj \
+              -scheme StudyLens \
+              -configuration Release \
